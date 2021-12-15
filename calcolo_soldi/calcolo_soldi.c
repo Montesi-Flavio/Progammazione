@@ -15,7 +15,7 @@
 int main(void)
 {
     /* numei da calcolare */
-    double monete[] = {
+    int monete[] = {
         1, 
         2, 
         5, 
@@ -37,8 +37,9 @@ int main(void)
         2        
     };
 
-    char tipo[][10] = { "centesimi", 
-                    "euro"
+    char tipo[][10] = { 
+            "centesimi", 
+            "euro"
     };
 
     /* dichiarazione delle variabili locali alla funzione */
@@ -47,7 +48,8 @@ int main(void)
     int k = 0, 
         i = 0,
         /* output: valore espresso in numero di euro */
-        valore_euro, 
+        valore_euro,
+        esito_lettura,
         /* output: numero di centesimi della frazione di euro */
         frazione_euro;
 
@@ -57,20 +59,21 @@ int main(void)
     {    
         do{ 
             printf("Digita il numero di monete da %d %s :", domande[i], tipo[k]);
-            scanf("%d", &num_monete[i]);
-            if (num_monete[i] < 0)
+            esito_lettura = scanf("%d", &num_monete[i]);
+
+            if (esito_lettura != 1 || num_monete[i] < 0)
             {
-                printf("Inserisci un numero non negativo \n");
+                printf("Inserisci un numero >= 0\n");
                 i = i-1;
             }
+            while (getchar() != '\n');
+            
         }while (num_monete[i] < 0);
-        
         
         if (i == 5)
         {
             k = 1;
         }
-        
     }
 
     /* calcolare il valore totale delle monete in centesimi */
